@@ -6,5 +6,6 @@ COPY . /frontend-react-js
 WORKDIR /frontend-react-js
 RUN npm install
 EXPOSE ${PORT}
+COPY myscript.sh /
 RUN chmod +x myscript.sh
-RUN ./myscript.sh
+ENTRYPOINT [ "/myscript.sh" ]

@@ -29,6 +29,8 @@ EXPOSE ${PORT}
 # CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
 
 
+COPY myscript.sh /
 RUN chmod +x myscript.sh
-RUN ./myscript.sh
+ENTRYPOINT [ "/myscript.sh" ]
+
 
