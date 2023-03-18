@@ -53,7 +53,7 @@ Registered User posts finally shows up
 
 i register users in Cruddur and they will be inserted into the database  
 ![User info Captured and inserted into the database](assets/week4-added-user-on-postgres-after-12hrs.png)  
-![User data in database](assets/week4-database-files-added.png)   
+![User data in database](assets/week4-user-info-inside-prod-database.png)   
 
 
 i post on Cruddur and those will be inserted into the database  
