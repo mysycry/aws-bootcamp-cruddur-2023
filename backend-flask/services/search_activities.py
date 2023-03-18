@@ -12,9 +12,9 @@ class SearchActivities:
       model['errors'] = ['search_term_blank']
     else:
       results = [{
-        'uuid': '248959df-3079-4947-b847-9e0892d1bab4',
-        'handle':  'Andrew Brown',
-        'message': 'Cloud is fun!',
+        'uuid': 'f450db40-4f00-46db-8472-7f461d1016b0',
+        'handle':  'Michael Josias',
+        'message': 'Cloud is good. All the time.',
         'created_at': now.isoformat()
       }]
       model['data'] = results

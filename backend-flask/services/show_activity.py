@@ -3,9 +3,9 @@ class ShowActivities:
   def run(activity_uuid):
     now = datetime.now(timezone.utc).astimezone()
     results = [{
-      'uuid': '68f126b0-1ceb-4a33-88be-d90fa7109eee',
-      'handle':  'Andrew Brown',
-      'message': 'Cloud is fun!',
+      'uuid': 'f450db40-4f00-46db-8472-7f461d1016b0',
+      'handle':  'Michael Josias',
+      'message': 'Cloud is good. All the time.',
       'created_at': (now - timedelta(days=2)).isoformat(),
       'expires_at': (now + timedelta(days=5)).isoformat(),
       'replies': {
