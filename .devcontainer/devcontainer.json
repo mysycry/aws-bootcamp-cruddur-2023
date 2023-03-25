@@ -15,7 +15,8 @@
 				"dracula-theme.theme-dracula"
 			],
 			"settings": {
-				"terminal.integrated.fontSize": 20,
+				"workbench.colorTheme": "Default Dark+ Experimental",
+				"terminal.integrated.fontSize": 13,
 				"editor.fontSize": 14
 			}
 		}
