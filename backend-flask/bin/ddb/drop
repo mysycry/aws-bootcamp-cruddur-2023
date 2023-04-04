@@ -3,7 +3,7 @@
 set -e
 
 if [ -z "$1" ]; then
-  echo "No TABLE_NAME argument supplied eg. bin/rds/describ-table cruddur-messages"
+  echo "No TABLE_NAME argument supplied eg. bin/rds/describe-table cruddur-messages"
   exit 1
 fi
 TABLE_NAME=$1

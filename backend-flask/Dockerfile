@@ -1,4 +1,4 @@
-FROM python:3.10-slim-buster
+FROM 211572490796.dkr.ecr.ca-central-1.amazonaws.com/cruddur-python:3.10-slim-buster
 
 # Inside Container
 # make a new folder inside container
@@ -20,7 +20,7 @@ COPY . .
 
 # Set Environment Variables (Env Vars)
 # Inside Container and will remain set when the container is running
-ENV FLASK_ENV=development
+ENV FLASK_DEBUG=1
 
 EXPOSE ${PORT}
 
@@ -32,5 +32,4 @@ EXPOSE ${PORT}
 COPY myscript.sh /
 RUN chmod +x myscript.sh
 ENTRYPOINT [ "/myscript.sh" ]
-
 
