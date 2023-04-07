@@ -33,4 +33,4 @@ COPY myscript.sh /
 RUN chmod +x myscript.sh
 ENTRYPOINT [ "/myscript.sh" ]
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567", "--no-debug"]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567", "-debug"]
