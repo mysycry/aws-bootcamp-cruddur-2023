@@ -1,4 +1,5 @@
 FROM 211572490796.dkr.ecr.ca-central-1.amazonaws.com/cruddur-python:3.10-slim-buster
+ENV PYTHONUNBUFFERED=1
 
 # Inside Container
 # make a new folder inside container
@@ -33,4 +34,4 @@ COPY myscript.sh /
 RUN chmod +x myscript.sh
 ENTRYPOINT [ "/myscript.sh" ]
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567", "-debug"]
+CMD [ "python3", "-m","-u", "flask", "run", "--host=0.0.0.0", "--port=4567", "-debug"]
