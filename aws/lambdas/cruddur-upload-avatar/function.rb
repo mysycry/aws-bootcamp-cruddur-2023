@@ -1,33 +1,59 @@
-
-
 require 'aws-sdk-s3'
 require 'json'
+require 'jwt'
 
 def handler(event:, context:)
   puts event
-  s3 = Aws::S3::Resource.new
-  bucket_name = ENV["UPLOADS_BUCKET_NAME"]
-  object_key = 'battlestation.jpg'
+  # return cors headers for preflight check
+  if event['routeKey'] == "OPTIONS /{proxy+}"
+    puts({step: 'preflight', message: 'preflight CORS check'}.to_json)
+    { 
+      headers: {
+        "Access-Control-Allow-Headers": "*, Authorization",
+        "Access-Control-Allow-Origin": "https://3000-micser900-awsbootcampcr-kav0blacd1s.ws-us95.gitpod.io",
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST"
+      },
+      statusCode: 200
+    }
+  else
+    if event['headers'].nil? || event['headers']['authorization'].nil?
+      # Handle the case when headers or authorization is missing
+      # Return an appropriate response or raise an error, depending on your requirements
+      # For example, you can return an error response with a specific status code and error message
+      return {
+        statusCode: 400,
+        body: "Authorization header is missing"
+      }
+    end
 
-  obj = s3.bucket(bucket_name).object(object_key)
-  url = obj.presigned_url(:put, expires_in: 60 * 5)
-  url # this is the data that will be returned
-  body = {url: url}.to_json
-  {
-    headers: {
+    token = event['headers']['authorization'].split(' ')[1]
+    puts({step: 'presignedurl', access_token: token}.to_json)
 
 
-puts handler(
-      "Access-Control-Allow-Headers": "*, Authorization",
-  event: {},
-      "Access-Control-Allow-Origin": "https://3000-micser900-awsbootcampcr-kav0blacd1s.ws-us95.gitpod.io",
-  context: {}
-      "Access-Control-Allow-Methods": "OPTIONS,GET,POST"
-)
-    },
+    body_hash = JSON.parse(event["body"])
+    extension = body_hash["extension"]
 
-    statusCode: 200, 
-    body: body 
+    decoded_token = JWT.decode token, nil, false
+    cognito_user_uuid = decoded_token[0]['sub']
 
-  }
-end
+    s3 = Aws::S3::Resource.new
+    bucket_name = ENV["UPLOADS_BUCKET_NAME"]
+    object_key = "#{cognito_user_uuid}.#{extension}"
+
+    puts({object_key: object_key}.to_json)
+
+    obj = s3.bucket(bucket_name).object(object_key)
+    url = obj.presigned_url(:put, expires_in: 60 * 5)
+    url # this is the data that will be returned
+    body = {url: url}.to_json
+    { 
+      headers: {
+        "Access-Control-Allow-Headers": "*, Authorization",
+        "Access-Control-Allow-Origin": "https://3000-micser900-awsbootcampcr-kav0blacd1s.ws-us95.gitpod.io",
+        "Access-Control-Allow-Methods": "OPTIONS,GET,POST"
+      },
+      statusCode: 200, 
+      body: body 
+    }
+  end # if 
+end # def handler
