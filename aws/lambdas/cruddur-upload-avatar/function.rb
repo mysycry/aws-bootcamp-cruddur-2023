@@ -10,22 +10,12 @@ def handler(event:, context:)
     { 
       headers: {
         "Access-Control-Allow-Headers": "*, Authorization",
-        "Access-Control-Allow-Origin": "https://3000-micser900-awsbootcampcr-kav0blacd1s.ws-us95.gitpod.io",
+        "Access-Control-Allow-Origin": "https://3000-mysycry-awsbootcampcrud-155xwy8r1zi.ws-us96b.gitpod.io",
         "Access-Control-Allow-Methods": "OPTIONS,GET,POST"
       },
       statusCode: 200
     }
   else
-    if event['headers'].nil? || event['headers']['authorization'].nil?
-      # Handle the case when headers or authorization is missing
-      # Return an appropriate response or raise an error, depending on your requirements
-      # For example, you can return an error response with a specific status code and error message
-      return {
-        statusCode: 400,
-        body: "Authorization header is missing"
-      }
-    end
-
     token = event['headers']['authorization'].split(' ')[1]
     puts({step: 'presignedurl', access_token: token}.to_json)
 
@@ -49,7 +39,7 @@ def handler(event:, context:)
     { 
       headers: {
         "Access-Control-Allow-Headers": "*, Authorization",
-        "Access-Control-Allow-Origin": "https://3000-micser900-awsbootcampcr-kav0blacd1s.ws-us95.gitpod.io",
+        "Access-Control-Allow-Origin": "https://3000-mysycry-awsbootcampcrud-155xwy8r1zi.ws-us96b.gitpod.io",
         "Access-Control-Allow-Methods": "OPTIONS,GET,POST"
       },
       statusCode: 200, 
