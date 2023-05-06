@@ -23,12 +23,16 @@ What does the policy looks like?
 Create a ```cruddur-backend-flask-bake-image```.  
 
 Source provider will be Github, repository is my ```mysycry/aws-bootcamp-cruddur-2023```. set source version to ```prod```. After a pull request, the build will be automatically triggered as you can see in this screenshot.  
-<img src="assets/week9-in-progress-after-pull-request-granted.png" alt="codebuild" width="700">  
+<img src="assets/week9-source-stage-review.png" alt="Source" width="700">  
+
+Then I have this error in CodeBuild, then after an investigation, all I need to do is to raise a ticket to AWS Support and ask for an increase in concurrent build. In less than 24hrs, they responded and they ask for my region and how many builds. I told them 20. They then work on it, then after a day, they inform me that the engineers are done with my request.  
+<img src="assets/week9-cannot-have-more-than-0-builds-in-queue-for-the-account.png" alt="Zero Concureent Builds" width="700">  
 
 In the Environment of the Build, create a new role automatically named as ```codebuild-cruddur-backend-flask-bake-image-service-role```  
 and decrease timeout to 20 min, don't select any certificate nor a VPC, select compute as 3 GB memory and 2 vCPUs  
 
 Buildspec file is ```backend-flask/buildspec.yml```  
+<img src="assets/week9-in-progress-after-pull-request-granted.png" alt="codebuild" width="700">  
 
 # AWS CodePipeline  
 
@@ -39,7 +43,9 @@ For deploy stage: select ```ECS``` as deploy provider, choose cruddur cluster, b
 
 # Testing  
 
-Edit some codes in Gitpod then commit them. After that merge the main branch to the prod branch. It will then trigger the Code Pipeline.  
+Edit some codes in Gitpod then commit them. Create a pull request and merge the main branch to the prod branch. It will then trigger the Code Pipeline.  
+<img src="assets/week9-create-pull-request.png" alt="Pull Request" width="700">  
+
 Below screenshot shows a successful pipeline.  
 <img src="assets/week9-codepipeline-success.png" alt="Successful Pipeline" width="700">  
 The Build Logs:  
