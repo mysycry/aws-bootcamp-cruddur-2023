@@ -6,7 +6,7 @@
     "enableExecuteCommand": true,
     "loadBalancers": [
       {
-          "targetGroupArn": "arn:aws:elasticloadbalancing:ca-central-1:211572490796:targetgroup/CrdClusterBackendTG/948e1a90fa8e601e",
+          "targetGroupArn": "arn:aws:elasticloadbalancing:ca-central-1:211572490796:targetgroup/CrdClu-Backe-MMRDCWNYVTKT/8560094a67fed29b",
           "containerName": "backend-flask",
           "containerPort": 4567
       }
