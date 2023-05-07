@@ -33,7 +33,7 @@ Parameters:
     Default: backend-flask
   EcrImage:
     Type: String
-    Default: '387543059434.dkr.ecr.ca-central-1.amazonaws.com/backend-flask'
+    Default: '211572490796.dkr.ecr.ca-central-1.amazonaws.com/backend-flask'
   EnvOtelServiceName:
     Type: String
     Default: backend-flask
@@ -42,10 +42,10 @@ Parameters:
     Default: https://api.honeycomb.io
   EnvAWSCognitoUserPoolId:
     Type: String
-    Default: ca-central-1_CQ4wDfnwc
+    Default: ca-central-1_ehs2zzfv9
   EnvCognitoUserPoolClientId:
     Type: String
-    Default: 5b6ro31g97urk767adrbrdj1g5
+    Default: 5mm18t9ca5h0u0gk3hfkvo9ed7
   EnvFrontendUrl:
     Type: String
     Default: "*"
@@ -54,19 +54,19 @@ Parameters:
     Default: "*"
   SecretsAWSAccessKeyId:
     Type: String
-    Default: 'arn:aws:ssm:ca-central-1:387543059434:parameter/cruddur/backend-flask/AWS_ACCESS_KEY_ID'
+    Default: 'arn:aws:ssm:ca-central-1:211572490796:parameter/cruddur/backend-flask/AWS_ACCESS_KEY_ID'
   SecretsSecretAccessKey:
     Type: String
-    Default: 'arn:aws:ssm:ca-central-1:387543059434:parameter/cruddur/backend-flask/AWS_SECRET_ACCESS_KEY'
+    Default: 'arn:aws:ssm:ca-central-1:211572490796:parameter/cruddur/backend-flask/AWS_SECRET_ACCESS_KEY'
   SecretsConnectionUrl:
     Type: String
-    Default: 'arn:aws:ssm:ca-central-1:387543059434:parameter/cruddur/backend-flask/CONNECTION_URL'
+    Default: 'arn:aws:ssm:ca-central-1:211572490796:parameter/cruddur/backend-flask/CONNECTION_URL'
   SecretsRollbarAccessToken:
     Type: String
-    Default: 'arn:aws:ssm:ca-central-1:387543059434:parameter/cruddur/backend-flask/ROLLBAR_ACCESS_TOKEN'
+    Default: 'arn:aws:ssm:ca-central-1:211572490796:parameter/cruddur/backend-flask/ROLLBAR_ACCESS_TOKEN'
   SecretsOtelExporterOltpHeaders:
     Type: String
-    Default: 'arn:aws:ssm:ca-central-1:387543059434:parameter/cruddur/backend-flask/OTEL_EXPORTER_OTLP_HEADERS'
+    Default: 'arn:aws:ssm:ca-central-1:211572490796:parameter/cruddur/backend-flask/OTEL_EXPORTER_OTLP_HEADERS'
 
 Resources:
   ServiceSG:
@@ -98,13 +98,14 @@ Resources:
       DesiredCount: 1
       EnableECSManagedTags: true
       EnableExecuteCommand: true
-      HealthCheckGracePeriodSeconds: 0
+      HealthCheckGracePeriodSeconds: 100
       LaunchType: FARGATE
       LoadBalancers:
-      # TODO - UPDATE THIS
-        - TargetGroupArn: 'arn:aws:elasticloadbalancing:ca-central-1:387543059434:targetgroup/cruddur-backend-flask-tg/87ed2a3daf2d2b1d'
-          ContainerName: 'backend-flask'
-          ContainerPort: !Ref ContainerPort
+      - TargetGroupArn:
+            Fn::ImportValue:
+              !Sub "${ClusterStack}BackendTGArn"
+        ContainerName: 'backend-flask'
+        ContainerPort: !Ref ContainerPort
       NetworkConfiguration:
         AwsvpcConfiguration:
           AssignPublicIp: ENABLED
@@ -117,11 +118,21 @@ Resources:
                   !Sub "${NetworkingStack}PublicSubnetIds"
       PlatformVersion: LATEST
       PropagateTags: SERVICE
-      ServiceRegistries:
-        - RegistryArn: !Sub 'arn:aws:servicediscovery:${AWS::Region}:${AWS::AccountId}:service/srv-cruddur-backend-flask'
-          Port: !Ref ContainerPort
-          ContainerName: 'backend-flask'
-          ContainerPort: !Ref ContainerPort
+      ServiceConnectConfiguration:
+        Enabled: true
+        Namespace: "cruddurCFN"
+        # TODO - If you want to log
+        # LogConfiguration
+        Services:
+          - DiscoveryName: backend-flask
+            PortName: backend-flask
+            ClientAliases:
+              - Port: !Ref ContainerPort
+      #ServiceRegistries:
+      #  - RegistryArn: !Sub 'arn:aws:servicediscovery:${AWS::Region}:${AWS::AccountId}:service/srv-cruddur-backend-flask'
+      #    Port: !Ref ContainerPort
+      #    ContainerName: 'backend-flask'
+      #    ContainerPort: !Ref ContainerPort
       ServiceName: !Ref ServiceName
       TaskDefinition: !Ref TaskDefinition
 
@@ -257,3 +268,9 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
         - arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess
+
+Outputs:
+  ServiceSecurityGroupId:
+    Value: !GetAtt ServiceSG.GroupId
+    Export:
+      Name: !Sub "${AWS::StackName}ServiceSecurityGroupId"
