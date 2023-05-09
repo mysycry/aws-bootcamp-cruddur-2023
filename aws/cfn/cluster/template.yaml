@@ -88,7 +88,7 @@ Resources:
           # KmsKeyId: !Ref KmsKeyId
           Logging: DEFAULT
       ServiceConnectDefaults:
-        Namespace: cruddurCFN
+        Namespace: cruddur
   ALB:
     # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
@@ -196,8 +196,8 @@ Resources:
       SecurityGroupIngress:
         - IpProtocol: tcp
           SourceSecurityGroupId: !GetAtt ALBSG.GroupId
-          FromPort: !Ref BackendPort
-          ToPort: !Ref BackendPort
+          FromPort: 80
+          ToPort: 80
           Description: ALB HTTP
   BackendTG:
     # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html
