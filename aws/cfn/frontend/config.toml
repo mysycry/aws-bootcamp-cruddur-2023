@@ -1,0 +1,9 @@
+[deploy]
+bucket = 'mysycry-cfn-artifacts'
+region = 'ca-central-1'
+stack_name = 'CrdFrontend'
+
+[parameters]
+CertificateArn = 'arn:aws:acm:ca-central-1:211572490796:certificate/e2620a10-ee4c-40d1-9970-d7e86866f75f'
+WwwBucketName = 'www.cloudmate.tech'
+RootBucketName = 'cloudmate.tech'
