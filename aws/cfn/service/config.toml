@@ -4,5 +4,5 @@ region = 'ca-central-1'
 stack_name = 'CrdSrvBackendFlask'
 
 [parameters]
-EnvFrontendUrl = 'cloudmate.tech'
-EnvBackendUrl = 'api.cloudmate.tech'
+EnvFrontendUrl = 'https://cloudmate.tech'
+EnvBackendUrl = 'https://api.cloudmate.tech'
