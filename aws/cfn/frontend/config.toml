@@ -4,6 +4,6 @@ region = 'ca-central-1'
 stack_name = 'CrdFrontend'
 
 [parameters]
-CertificateArn = 'arn:aws:acm:ca-central-1:211572490796:certificate/e2620a10-ee4c-40d1-9970-d7e86866f75f'
+CertificateArn = 'arn:aws:acm:us-east-1:211572490796:certificate/db77d581-d9d0-4ba6-a2a7-852f491b3edc'
 WwwBucketName = 'www.cloudmate.tech'
 RootBucketName = 'cloudmate.tech'
