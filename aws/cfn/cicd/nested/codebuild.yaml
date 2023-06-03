@@ -3,6 +3,7 @@ Description: |
   Codebuild used for baking container images
   - Codebuild Project
   - Codebuild Project Role
+
 Parameters:
   LogGroupPath:
     Type: String
@@ -109,4 +110,4 @@ Resources:
 Outputs:
   CodeBuildProjectName:
     Description: "CodeBuildProjectName"
-    Value: !Sub ${AWS::StackName}Project
+    Value: !Ref CodeBuild
