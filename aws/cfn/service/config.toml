@@ -1,0 +1,8 @@
+[deploy]
+bucket = 'mysycry-cfn-artifacts'
+region = 'ca-central-1'
+stack_name = 'CrdSrvBackendFlask'
+
+[parameters]
+EnvFrontendUrl = 'https://cloudmate.tech'
+EnvBackendUrl = 'https://api.cloudmate.tech'
