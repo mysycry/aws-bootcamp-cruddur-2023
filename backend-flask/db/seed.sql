@@ -12,7 +12,7 @@ VALUES
   (
     (SELECT uuid from public.users WHERE users.handle = 'mysycry' LIMIT 1),
     'This was imported as seed data!',
-    current_timestamp 0 interval '10 day'
+    current_timestamp + interval '10 day'
   ),
   (
     (SELECT uuid from public.users WHERE users.handle = 'josiasmichael2' LIMIT 1),
