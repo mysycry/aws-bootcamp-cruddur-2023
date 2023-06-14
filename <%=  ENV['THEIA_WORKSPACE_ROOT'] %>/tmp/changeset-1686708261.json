@@ -1,0 +1,34 @@
+[
+  {
+    "path": "android-chrome-192x192.png",
+    "action": "ignore"
+  },
+  {
+    "path": "apple-touch-icon.png",
+    "action": "ignore"
+  },
+  {
+    "path": "favicon-16x16.png",
+    "action": "ignore"
+  },
+  {
+    "path": "favicon-32x32.png",
+    "action": "ignore"
+  },
+  {
+    "path": "favicon.ico",
+    "action": "ignore"
+  },
+  {
+    "path": "robots.txt",
+    "action": "ignore"
+  },
+  {
+    "path": "safari-pinned-tab.svg",
+    "action": "ignore"
+  },
+  {
+    "path": "site.webmanifest",
+    "action": "ignore"
+  }
+]

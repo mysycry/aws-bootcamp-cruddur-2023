@@ -6,3 +6,5 @@ stack_name = 'CrdSrvBackendFlask'
 [parameters]
 EnvFrontendUrl = 'https://cloudmate.tech'
 EnvBackendUrl = 'https://api.cloudmate.tech'
+
+DDBMessageTable = 'CrdDdb-DynamoDBTable-I5MH4YUBE2MW'
