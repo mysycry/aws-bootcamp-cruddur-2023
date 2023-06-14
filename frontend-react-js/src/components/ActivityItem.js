@@ -1,6 +1,6 @@
 import './ActivityItem.css';
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
 import ActivityContent  from '../components/ActivityContent';
 import ActivityActionReply  from '../components/ActivityActionReply';
 import ActivityActionRepost  from '../components/ActivityActionRepost';
@@ -33,5 +33,5 @@ export default function ActivityItem(props) {
         </div>
       </div>
     </div>
-  );
+  )
 }

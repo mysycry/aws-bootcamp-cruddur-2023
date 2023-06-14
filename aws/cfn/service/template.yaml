@@ -48,10 +48,10 @@ Parameters:
     Default: 5mm18t9ca5h0u0gk3hfkvo9ed7
   EnvFrontendUrl:
     Type: String
-    Default: "*"
+    Default: "https://cloudmate.tech"
   EnvBackendUrl:
     Type: String
-    Default: "*"
+    Default: "https://api.cloudmate.tech"
   SecretsAWSAccessKeyId:
     Type: String
     Default: 'arn:aws:ssm:ca-central-1:211572490796:parameter/cruddur/backend-flask/AWS_ACCESS_KEY_ID'
