@@ -1,0 +1,4 @@
+[deploy]
+bucket = 'mysycry-cfn-artifacts'
+region = 'ca-central-1'
+stack_name = 'CrdMachineUser'
