@@ -13,4 +13,5 @@ REACT_APP_AWS_PROJECT_REGION="$AWS_DEFAULT_REGION" \
 REACT_APP_AWS_COGNITO_REGION="$AWS_DEFAULT_REGION" \
 REACT_APP_AWS_USER_POOLS_ID="ca-central-1_ehs2zzfv9" \
 REACT_APP_CLIENT_ID="5mm18t9ca5h0u0gk3hfkvo9ed7" \
+REACT_APP_API_GATEWAY_ENDPOINT_URL="https://ljvig67jqd.execute-api.ca-central-1.amazonaws.com" \
 npm run build
